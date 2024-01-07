@@ -17,6 +17,8 @@
     "clsx": "^2.1.0",
     "collect.js": "^4.36.1",
     "date-fns": "^3.1.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "lucide-react": "^0.304.0",
     "next": "14.0.4",
     "react": "^18",
