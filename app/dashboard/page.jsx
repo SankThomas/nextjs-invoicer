@@ -18,6 +18,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { v4 as uuidv4 } from "uuid";
 
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 export default function Dashboard() {
   // State values for step 1
   const [name, setName] = useState("");
@@ -92,6 +95,23 @@ export default function Dashboard() {
     calculateAmount(total);
   }, [total, price, quantity, setTotal]);
 
+  // Create PDF
+  function createPDF() {
+    const invoice = document.getElementById("pdf");
+    html2canvas(invoice, {
+      logging: true,
+      letterRendering: 1,
+      useCORS: true,
+    }).then((canvas) => {
+      const imgWidth = 208;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL("img/png");
+      const pdf = new jsPDF("portrait", "mm", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save(`${clientName}.pdf`);
+    });
+  }
+
   // Destructure all our state values to easily pass them as props
   const values = {
     name,
@@ -135,6 +155,7 @@ export default function Dashboard() {
     isEditing,
     setIsEditing,
     handleAddItem,
+    createPDF,
   };
 
   return (
@@ -166,7 +187,7 @@ export default function Dashboard() {
                   {steps === 3 && <Step3 values={values} setSteps={setSteps} />}
                 </div>
 
-                <div className="hidden lg:block flex-1 sticky">
+                <div id="pdf" className="hidden lg:block flex-1 sticky">
                   <InvoiceView values={values} />
                 </div>
               </div>
