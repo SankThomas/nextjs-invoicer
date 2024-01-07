@@ -3,8 +3,11 @@ import Header from "./_components/header";
 import { Check } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import Link from "next/link";
+import { auth, clerkClient } from "@clerk/nextjs";
 
 export default function LandingPage() {
+  const { userId } = auth();
+
   return (
     <>
       <Header />
@@ -44,18 +47,28 @@ export default function LandingPage() {
           </li>
         </ul>
 
-        <ul className="flex items-center justify-center gap-4">
-          <li>
-            <Button asChild variant="secondary">
-              <Link href="/sign-up">Sign Up</Link>
-            </Button>
-          </li>
-          <li>
-            <Button asChild variant="default">
-              <Link href="/sign-in">Sign In</Link>
-            </Button>
-          </li>
-        </ul>
+        {!userId ? (
+          <ul className="flex items-center justify-center gap-4">
+            <li>
+              <Button asChild variant="secondary">
+                <Link href="/sign-up">Sign Up</Link>
+              </Button>
+            </li>
+            <li>
+              <Button asChild variant="default">
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+            </li>
+          </ul>
+        ) : (
+          <ul className="flex items-center justify-center">
+            <li>
+              <Button asChild variant="default">
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+            </li>
+          </ul>
+        )}
 
         <div className="absolute right-0 w-40 h-40 bg-blue-500 blur-[100px] -z-10"></div>
       </section>
