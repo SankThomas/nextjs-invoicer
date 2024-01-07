@@ -106,7 +106,9 @@ export default function Step3({ values, setSteps }) {
           </li>
 
           <li>
-            <Button variant="default">Download Invoice</Button>
+            <Button onClick={values.createPDF} variant="default">
+              Download Invoice
+            </Button>
           </li>
         </ul>
       </section>
