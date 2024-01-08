@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button } from "../../../components/ui/button";
 
 export default function Step1({ values, setSteps }) {
   // Prevent hydration errors
@@ -17,7 +16,7 @@ export default function Step1({ values, setSteps }) {
 
   return (
     <section className="space-y-8">
-      <h2 className="font-bold text-xl">Step 1 / 3: Your details</h2>
+      <h2 className="font-bold text-xl">Your details</h2>
 
       <form className="grid gap-8">
         <div className="flex flex-col gap-4 md:flex-row">
@@ -158,15 +157,6 @@ export default function Step1({ values, setSteps }) {
           </article>
         </div>
       </form>
-
-      <Button
-        onClick={() => {
-          setSteps(2);
-          window.scrollTo(0, 0);
-        }}
-      >
-        <button>Next step</button>
-      </Button>
     </section>
   );
 }
