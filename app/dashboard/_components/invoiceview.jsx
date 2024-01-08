@@ -4,7 +4,7 @@ import { format } from "date-fns";
 export default function InvoiceView({ values }) {
   return (
     <>
-      <section className="bg-white p-4 rounded border space-y-8 max-h-[500px] overflow-auto">
+      <section className="bg-white p-4 rounded border space-y-8 max-h-full overflow-auto">
         <div className="text-right">
           <h2 className="text-lg lg:text-xl font-bold">{values.name}</h2>
           <p>{values.address}</p>
@@ -33,10 +33,21 @@ export default function InvoiceView({ values }) {
 
         <div>
           <ul className="bg-slate-200 p-1 rounded flex items-center justify-between text-sm font-bold text-slate-900">
-            <li>Item name</li>
+            <li>Item</li>
             <li>Quantity</li>
-            <li>Price / unit</li>
-            <li>Total amount</li>
+            <li>Price</li>
+            <li>Total</li>
+          </ul>
+
+          <ul className="p-1 rounded flex items-center justify-between text-sm text-slate-900">
+            {values.items.map((item) => (
+              <>
+                <li>{item.item}</li>
+                <li>{item.quantity}</li>
+                <li>{item.price}</li>
+                <li>{item.total}</li>
+              </>
+            ))}
           </ul>
 
           <div className="grid gap-2 mt-2">
