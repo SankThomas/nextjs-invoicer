@@ -3,7 +3,7 @@ import Header from "./_components/header";
 import { Check } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import Link from "next/link";
-import { auth, clerkClient } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 
 export default function LandingPage() {
   const { userId } = auth();
