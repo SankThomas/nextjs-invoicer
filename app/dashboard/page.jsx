@@ -160,7 +160,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <section className="py-8 px-4 lg:pl-[304px]">
+      <section className="py-8 px-4 container">
         <div className="flex items-center justify-between">
           <Button variant="outline">Your Dashboard</Button>
 
@@ -171,23 +171,21 @@ export default function Dashboard() {
           <div className="absolute top-4 left-4 w-40 h-40 bg-pink-500/25 blur-[100px] -z-10"></div>
 
           <div className="max-w-7xl">
-            <article>
-              <Sidebar />
-            </article>
+            <article>{/* <Sidebar /> */}</article>
 
             <article>
               <h1 className="text-4xl lg:text-5xl font-bold mb-16">
                 Create Invoice
               </h1>
 
-              <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
                 <div className="flex-1">
                   {steps === 1 && <Step1 values={values} setSteps={setSteps} />}
                   {steps === 2 && <Step2 values={values} setSteps={setSteps} />}
                   {steps === 3 && <Step3 values={values} setSteps={setSteps} />}
                 </div>
 
-                <div id="pdf" className="hidden lg:block flex-1 sticky">
+                <div id="pdf" className="hidden lg:block flex-1">
                   <InvoiceView values={values} />
                 </div>
               </div>
