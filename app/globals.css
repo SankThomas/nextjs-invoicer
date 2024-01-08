@@ -75,6 +75,28 @@
   }
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 li {
   list-style-type: none;
 }
@@ -102,4 +124,20 @@ p {
 
 .textarea {
   @apply flex h-52 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.privacy-policy h2 {
+  @apply font-bold text-2xl my-6;
+}
+
+.privacy-policy h3 {
+  @apply font-bold text-xl my-6;
+}
+
+.privacy-policy p {
+  line-height: 1.8;
+}
+
+.privacy-policy strong {
+  @apply font-bold;
 }
