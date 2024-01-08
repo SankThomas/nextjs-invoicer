@@ -2,7 +2,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "600", "700" ] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700" ] });
 
 export const metadata = {
   title: {
