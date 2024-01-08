@@ -53,7 +53,7 @@ export default function Dashboard() {
 
   // Calculate the total amount
   function calculateTotal() {
-    const allItems = items.map((i) => i.price);
+    const allItems = items.map((i) => i.total);
 
     setTotalAmount(collect(allItems).sum());
   }
@@ -112,6 +112,21 @@ export default function Dashboard() {
     });
   }
 
+  // Edit function
+  const handleEdit = (id) => {
+    const editingRow = items.find((row) => row.id === id);
+    setItems(items.filter((row) => row.id !== id));
+    setIsEditing(true);
+    setItem(editingRow.item);
+    setQuantity(editingRow.quantity);
+    setPrice(editingRow.price);
+  };
+
+  // Delete function
+  const handleDelete = (id) => {
+    setItems(items.filter((row) => row.id !== id));
+  };
+
   // Destructure all our state values to easily pass them as props
   const values = {
     name,
@@ -156,36 +171,44 @@ export default function Dashboard() {
     setIsEditing,
     handleAddItem,
     createPDF,
+    handleEdit,
+    handleDelete,
   };
 
   return (
     <>
-      <section className="py-8 px-4 container">
-        <div className="flex items-center justify-between">
-          <Button variant="outline">Your Dashboard</Button>
+      <section>
+        <div className="p-4 lg:ml-52 bg-gradient-to-r from-slate-900 to-pink-500 flex items-center justify-between">
+          <Button variant="custom">Your Dashboard</Button>
 
           <UserButton afterSignOutUrl="/" />
         </div>
 
-        <div className="mt-16">
+        <div className="">
           <div className="absolute top-4 left-4 w-40 h-40 bg-pink-500/25 blur-[100px] -z-10"></div>
 
-          <div className="max-w-7xl">
-            <article>{/* <Sidebar /> */}</article>
-
+          <div>
             <article>
-              <h1 className="text-4xl lg:text-5xl font-bold mb-16">
+              <Sidebar />
+            </article>
+
+            <article className="lg:pl-52">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-16 bg-gradient-to-r from-slate-900 to-pink-500 pt-16 text-white pb-4 px-4">
                 Create Invoice
               </h1>
 
-              <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
-                <div className="flex-1">
-                  {steps === 1 && <Step1 values={values} setSteps={setSteps} />}
+              <div className="flex flex-col md:grid md:grid-cols-3 gap-8 lg:gap-16 lg:max-w-[1440px] lg:mx-auto lg:pb-20">
+                <div className="flex-1 md:col-span-2 lg:max-h-[600px] lg:overflow-auto px-4">
+                  {/* {steps === 1 && <Step1 values={values} setSteps={setSteps} />}
                   {steps === 2 && <Step2 values={values} setSteps={setSteps} />}
-                  {steps === 3 && <Step3 values={values} setSteps={setSteps} />}
+                  {steps === 3 && <Step3 values={values} setSteps={setSteps} />} */}
+
+                  <Step1 values={values} setSteps={setSteps} />
+                  <Step2 values={values} setSteps={setSteps} />
+                  <Step3 values={values} setSteps={setSteps} />
                 </div>
 
-                <div id="pdf" className="hidden lg:block flex-1">
+                <div id="pdf" className="hidden lg:block flex-1 scale-90">
                   <InvoiceView values={values} />
                 </div>
               </div>
