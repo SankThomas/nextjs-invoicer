@@ -1,11 +1,11 @@
+import Link from "next/link";
 import React from "react";
-import { Button } from "../../../components/ui/button";
 
 export default function Step2({ values, setSteps }) {
   return (
     <>
-      <section className="space-y-8">
-        <h2 className="font-bold text-xl">Step 2 / 3: Client details</h2>
+      <section className="space-y-8 mt-12">
+        <h2 className="font-bold text-xl">Client details</h2>
 
         <form className="grid gap-8">
           <div className="flex flex-col gap-4 md:flex-row">
@@ -40,7 +40,9 @@ export default function Step2({ values, setSteps }) {
                 value={values.clientEmail}
                 onChange={(e) => values.setClientEmail(e.target.value)}
               />
-              <small className="text-slate-600">Your email is optional.</small>
+              <small className="text-slate-600">
+                Client email is optional.
+              </small>
             </article>
           </div>
 
@@ -58,34 +60,18 @@ export default function Step2({ values, setSteps }) {
                 value={values.clientAddress}
                 onChange={(e) => values.setClientAddress(e.target.value)}
               />
-              <small className="text-slate-600">Read privacy policy</small>
+              <small className="text-slate-600">
+                Read our{" "}
+                <Link
+                  href="/privacy-policy"
+                  className="underline text-slate-800"
+                >
+                  privacy policy
+                </Link>
+              </small>
             </article>
           </div>
         </form>
-
-        <ul className="flex flex-wrap items-center justify-between gap-4">
-          <li>
-            <Button
-              onClick={() => {
-                setSteps(1);
-                window.scrollTo(0, 0);
-              }}
-              variant="outline"
-            >
-              <button>Previous step</button>
-            </Button>
-          </li>
-          <li>
-            <Button
-              onClick={() => {
-                setSteps(3);
-                window.scrollTo(0, 0);
-              }}
-            >
-              <button>Next step</button>
-            </Button>
-          </li>
-        </ul>
       </section>
     </>
   );
