@@ -4,13 +4,17 @@ import List from "./list";
 import { ToastContainer } from "react-toastify";
 
 export default function Step3({ values, setSteps }) {
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
     <>
       <ToastContainer position="top-right" theme="colored" />
-      <section className="space-y-8">
-        <h2 className="font-bold text-xl">Step 3 / 3: Item Descriptions</h2>
+      <section className="space-y-8 mt-12">
+        <h2 className="font-bold text-xl">Item Descriptions</h2>
 
-        <form className="grid gap-8">
+        <form onSubmit={handleSubmit} className="grid gap-8">
           <div className="flex flex-col gap-4 md:flex-row">
             <article className="md:flex-1">
               <label htmlFor="item-name" className="label">
@@ -28,23 +32,6 @@ export default function Step3({ values, setSteps }) {
             </article>
 
             <article className="md:flex-1">
-              <label htmlFor="price" className="label">
-                Price
-              </label>
-              <input
-                type="text"
-                name="price"
-                id="price"
-                placeholder="Price of the item"
-                className="input"
-                value={values.price}
-                onChange={(e) => values.setPrice(e.target.value)}
-              />
-            </article>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            <article>
               <label htmlFor="quantity" className="label">
                 Quantity
               </label>
@@ -58,6 +45,23 @@ export default function Step3({ values, setSteps }) {
                 onChange={(e) => values.setQuantity(e.target.value)}
               />
             </article>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <article className="md:flex-1">
+              <label htmlFor="price" className="label">
+                Price
+              </label>
+              <input
+                type="text"
+                name="price"
+                id="price"
+                placeholder="Price of the item"
+                className="input"
+                value={values.price}
+                onChange={(e) => values.setPrice(e.target.value)}
+              />
+            </article>
 
             <article>
               <label htmlFor="total" className="label">
@@ -67,11 +71,11 @@ export default function Step3({ values, setSteps }) {
                 {values.total.toLocaleString()}
               </p>
             </article>
-          </div>
 
-          <Button variant="default" onClick={values.handleAddItem}>
-            Add item
-          </Button>
+            <Button variant="default" onClick={values.handleAddItem}>
+              Add item
+            </Button>
+          </div>
 
           <List items={values} />
 
@@ -88,23 +92,15 @@ export default function Step3({ values, setSteps }) {
               value={values.notes}
               onChange={(e) => values.setNotes(e.target.value)}
               placeholder="Important information the client should know about"
+              spellCheck={true}
             ></textarea>
           </article>
         </form>
 
         <ul className="flex flex-wrap items-center justify-between gap-4">
           <li>
-            <Button
-              onClick={() => {
-                setSteps(2);
-                window.scrollTo(0, 0);
-              }}
-              variant="outline"
-            >
-              <button>Previous step</button>
-            </Button>
+            <Button variant="outline">Preview Invoice</Button>
           </li>
-
           <li>
             <Button onClick={values.createPDF} variant="default">
               Download Invoice
