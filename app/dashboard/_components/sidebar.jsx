@@ -22,7 +22,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:block w-52 bg-gradient-to-b from-slate-900 to-pink-500 text-white h-screen fixed left-0 top-0">
+    <aside className="hidden lg:block w-52 bg-slate-900 text-white h-screen fixed left-0 top-0">
       <div className="flex flex-col justify-between h-full px-4 py-8">
         <div>
           <h2 className="font-bold text-lg text-white">Welcome</h2>
