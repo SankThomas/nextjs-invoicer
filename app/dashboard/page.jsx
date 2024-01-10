@@ -7,9 +7,11 @@ import { Button } from "../../components/ui/button";
 
 import Sidebar from "./_components/sidebar";
 import Step1 from "./_components/step1";
-import InvoiceView from "./_components/invoiceview";
 import Step2 from "./_components/step2";
 import Step3 from "./_components/step3";
+import InvoiceView from "./_components/invoiceview";
+// import SendEmailModal from "./_components/sendemailmodal";
+import PreviewInvoice from "./_components/preview-invoice";
 
 import collect from "collect.js";
 
@@ -48,8 +50,14 @@ export default function Dashboard() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Steps to change the component being rendered
+  // Steps to change the component being rendered - this, though, is no longer being used
   const [steps, setSteps] = useState(1);
+
+  // State value for Send Email Modal (no yet functional)
+  // const [showModal, setShowModal] = useState(false);
+
+  // Preview invoice
+  const [previewInvoice, setPreviewInvoice] = useState(false);
 
   // Calculate the total amount
   function calculateTotal() {
@@ -173,12 +181,19 @@ export default function Dashboard() {
     createPDF,
     handleEdit,
     handleDelete,
+    // showModal,
+    // setShowModal,
+    previewInvoice,
+    setPreviewInvoice,
   };
 
   return (
     <>
       <section>
-        <div className="p-4 lg:ml-52 bg-gradient-to-r from-slate-900 to-pink-500 flex items-center justify-between">
+        {/* {showModal && <SendEmailModal values={values} />} */}
+        {previewInvoice && <PreviewInvoice values={values} />}
+
+        <div className="p-4 lg:ml-52 bg-slate-900 flex items-center justify-between">
           <Button variant="custom">Your Dashboard</Button>
 
           <UserButton afterSignOutUrl="/" />
@@ -193,11 +208,11 @@ export default function Dashboard() {
             </article>
 
             <article className="lg:pl-52">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-16 bg-gradient-to-r from-slate-900 to-pink-500 pt-16 text-white pb-4 px-4">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-16 bg-slate-900 pt-16 text-white pb-4 px-4">
                 Create Invoice
               </h1>
 
-              <div className="flex flex-col md:grid md:grid-cols-3 gap-8 lg:gap-16 lg:max-w-[1440px] lg:mx-auto lg:pb-20">
+              <div className="flex flex-col md:grid md:grid-cols-3 gap-8 lg:gap-16 lg:max-w-[1440px] lg:mx-auto pb-20">
                 <div className="flex-1 md:col-span-2 lg:max-h-[600px] lg:overflow-auto px-4">
                   {/* {steps === 1 && <Step1 values={values} setSteps={setSteps} />}
                   {steps === 2 && <Step2 values={values} setSteps={setSteps} />}
@@ -215,7 +230,7 @@ export default function Dashboard() {
             </article>
           </div>
 
-          <div className="absolute right-4 bottom-4 w-40 h-40 bg-blue-500/25 blur-[100px] -z-10"></div>
+          <div className="absolute right-4 bottom-4 w-40 h-40 bg-blue-500 blur-[100px] -z-10"></div>
         </div>
       </section>
     </>
