@@ -64,7 +64,7 @@ export default function LandingPage() {
           <ul className="flex items-center justify-center">
             <li>
               <Button asChild variant="default">
-                <Link href="/dashboard">Dashboard</Link>
+                <Link href="/dashboard">Go to Dashboard</Link>
               </Button>
             </li>
           </ul>
