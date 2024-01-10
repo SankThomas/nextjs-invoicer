@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function Step1({ values, setSteps }) {
+export default function Step1({ values }) {
   // Prevent hydration errors
   const [isMounted, setIsMounted] = useState(false);
 

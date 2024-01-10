@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 
-export default function Step2({ values, setSteps }) {
+export default function Step2({ values }) {
   return (
     <>
       <section className="space-y-8 mt-12">

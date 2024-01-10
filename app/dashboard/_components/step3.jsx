@@ -1,9 +1,11 @@
+"use client";
+
 import React from "react";
 import { Button } from "../../../components/ui/button";
 import List from "./list";
 import { ToastContainer } from "react-toastify";
 
-export default function Step3({ values, setSteps }) {
+export default function Step3({ values }) {
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -99,13 +101,18 @@ export default function Step3({ values, setSteps }) {
 
         <ul className="flex flex-wrap items-center justify-between gap-4">
           <li>
-            <Button variant="outline">Preview Invoice</Button>
-          </li>
-          <li>
-            <Button onClick={values.createPDF} variant="default">
-              Download Invoice
+            <Button
+              onClick={() => values.setPreviewInvoice(true)}
+              variant="default"
+            >
+              Preview Invoice
             </Button>
           </li>
+          {/* <li>
+            <Button onClick={() => values.setShowModal(true)} variant="default">
+              Send Email
+            </Button>
+          </li> */}
         </ul>
       </section>
     </>
