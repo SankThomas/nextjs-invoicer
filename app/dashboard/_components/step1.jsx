@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function Step1({ values, formik }) {
+export default function Step1({ formik }) {
   // Prevent hydration errors
   const [isMounted, setIsMounted] = useState(false);
 
@@ -97,14 +97,14 @@ export default function Step1({ values, formik }) {
           </article>
 
           <article>
-            <label htmlFor="number" className="label">
+            <label htmlFor="phoneNumber" className="label">
               Phone number
             </label>
             <input
-              type="number"
-              name="number"
-              id="number"
-              placeholder="Phone number"
+              type="text"
+              name="phoneNumber"
+              id="phoneNumber"
+              placeholder="Your phone number"
               className="input"
               value={formik.values.phoneNumber}
               onChange={formik.handleChange}
@@ -114,13 +114,13 @@ export default function Step1({ values, formik }) {
 
         <div className="grid gap-4 md:grid-cols-2">
           <article>
-            <label htmlFor="bank-name" className="label">
+            <label htmlFor="bankName" className="label">
               Bank name
             </label>
             <input
               type="text"
-              name="bank-name"
-              id="bank-name"
+              name="bankName"
+              id="bankName"
               placeholder="Your bank name"
               className="input"
               value={formik.values.bankName}
@@ -134,13 +134,13 @@ export default function Step1({ values, formik }) {
           </article>
 
           <article>
-            <label htmlFor="account-number" className="label">
+            <label htmlFor="accountNumber" className="label">
               Bank account number
             </label>
             <input
-              type="text"
-              name="account-number"
-              id="account-number"
+              type="number"
+              name="accountNumber"
+              id="accountNumber"
               placeholder="Your bank account number"
               className="input"
               value={formik.values.accountNumber}
@@ -156,13 +156,13 @@ export default function Step1({ values, formik }) {
 
         <div className="flex flex-col md:flex-row gap-4">
           <article className="md:flex-1">
-            <label htmlFor="date" className="label">
+            <label htmlFor="invoiceDate" className="label">
               Invoice date
             </label>
             <input
               type="date"
-              name="date"
-              id="date"
+              name="invoiceDate"
+              id="invoiceDate"
               placeholder="Invoice date"
               className="input"
               value={formik.values.invoiceDate}
@@ -176,13 +176,13 @@ export default function Step1({ values, formik }) {
           </article>
 
           <article className="md:flex-1">
-            <label htmlFor="due-date" className="label">
+            <label htmlFor="dueDate" className="label">
               Due date
             </label>
             <input
               type="date"
-              name="due-date"
-              id="due-date"
+              name="dueDate"
+              id="dueDate"
               placeholder="Due by"
               className="input"
               value={formik.values.dueDate}
@@ -191,6 +191,26 @@ export default function Step1({ values, formik }) {
             {formik.errors.dueDate && (
               <small className="text-rose-400 text-xs font-semibold">
                 {formik.errors.dueDate}
+              </small>
+            )}
+          </article>
+
+          <article className="md:flex-1">
+            <label htmlFor="invoiceNumber" className="label">
+              Invoice number
+            </label>
+            <input
+              type="number"
+              name="invoiceNumber"
+              id="invoiceNumber"
+              placeholder="Invoice number"
+              className="input"
+              value={formik.values.invoiceNumber}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.invoiceNumber && (
+              <small className="text-rose-400 text-xs font-semibold">
+                {formik.errors.invoiceNumber}
               </small>
             )}
           </article>

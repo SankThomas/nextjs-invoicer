@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 
-export default function Step2({ values }) {
+export default function Step2({ formik }) {
   return (
     <>
       <section className="space-y-8 mt-12">
@@ -12,57 +12,79 @@ export default function Step2({ values }) {
         <form className="grid gap-8">
           <div className="flex flex-col gap-4 md:flex-row">
             <article className="md:flex-1">
-              <label htmlFor="client-name" className="label">
+              <label htmlFor="clientName" className="label">
                 Client's name
               </label>
               <input
                 type="text"
-                name="client-name"
-                id="client-name"
+                name="clientName"
+                id="clientName"
                 placeholder="Client's name"
                 className="input"
-                value={values.clientName}
-                onChange={(e) => values.setClientName(e.target.value)}
+                value={formik.values.clientName}
+                onChange={formik.handleChange}
               />
-              <small className="text-slate-600">
-                The name of the client that will appear on the invoice
-              </small>
+              {!formik.errors.clientName ? (
+                <small className="text-slate-600">
+                  The name of the client that will appear on the invoice
+                </small>
+              ) : (
+                <small className="text-rose-400 text-xs font-semibold">
+                  {formik.errors.clientName}
+                </small>
+              )}
             </article>
 
             <article className="md:flex-1">
-              <label htmlFor="client-email" className="label">
+              <label htmlFor="clientEmail" className="label">
                 Client's email address
               </label>
               <input
                 type="email"
-                name="client-email"
-                id="client-email"
+                name="clientEmail"
+                id="clientEmail"
                 placeholder="Client's email address"
                 className="input"
-                value={values.clientEmail}
-                onChange={(e) => values.setClientEmail(e.target.value)}
+                value={formik.values.clientEmail}
+                onChange={formik.handleChange}
               />
-              <small className="text-slate-600">
-                Client email is optional.
-              </small>
+              {!formik.errors.clientEmail ? (
+                <small className="text-slate-600">
+                  The client's email address
+                </small>
+              ) : (
+                <small className="text-rose-400 text-xs font-semibold">
+                  {formik.errors.clientEmail}
+                </small>
+              )}
             </article>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
             <article>
-              <label htmlFor="client-address" className="label">
+              <label htmlFor="clientAddress" className="label">
                 Client's address
               </label>
               <input
                 type="text"
-                name="client-address"
-                id="client-address"
+                name="clientAddress"
+                id="clientAddress"
                 placeholder="Client's address"
                 className="input"
-                value={values.clientAddress}
-                onChange={(e) => values.setClientAddress(e.target.value)}
+                value={formik.values.clientAddress}
+                onChange={formik.handleChange}
               />
-              <small className="text-slate-600">
+              {!formik.errors.clientAddress ? (
+                <small className="text-slate-600">
+                  The address of the client
+                </small>
+              ) : (
+                <small className="text-rose-400 text-xs font-semibold">
+                  {formik.errors.clientAddress}
+                </small>
+              )}
+
+              <small className="text-slate-600 block">
                 Read our{" "}
                 <Link
                   href="/privacy-policy"

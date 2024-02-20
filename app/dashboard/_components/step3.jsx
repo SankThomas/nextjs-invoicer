@@ -5,7 +5,7 @@ import { Button } from "../../../components/ui/button";
 import List from "./list";
 import { ToastContainer } from "react-toastify";
 
-export default function Step3({ values }) {
+export default function Step3({ values, formik }) {
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -91,11 +91,16 @@ export default function Step3({ values }) {
               cols="30"
               rows="20"
               className="textarea"
-              value={values.notes}
-              onChange={(e) => values.setNotes(e.target.value)}
+              value={formik.values.notes}
+              onChange={formik.handleChange}
               placeholder="Important information the client should know about"
               spellCheck={true}
             ></textarea>
+            {!formik.errors.notes ? null : (
+              <small className="text-rose-400 text-xs font-semibold">
+                {formik.errors.notes}
+              </small>
+            )}
           </article>
         </form>
 
