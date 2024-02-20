@@ -66,6 +66,7 @@ export default function PreviewInvoice({ values, formik }) {
 
           <div>
             <h2 className="font-bold text-lg">{formik.values.clientName}</h2>
+            <p>{formik.values.clientEmail}</p>
             <p>{formik.values.clientAddress}</p>
           </div>
 
