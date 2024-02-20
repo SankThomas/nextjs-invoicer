@@ -189,23 +189,6 @@ export default function Dashboard() {
     calculateAmount(total);
   }, [total, price, quantity, setTotal]);
 
-  // Create PDF
-  function createPDF() {
-    const invoice = document.getElementById("pdf");
-    html2canvas(invoice, {
-      logging: true,
-      letterRendering: 1,
-      useCORS: true,
-    }).then((canvas) => {
-      const imgWidth = 208;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const imgData = canvas.toDataURL("img/png");
-      const pdf = new jsPDF("portrait", "mm", "a4");
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      pdf.save(`${clientName}.pdf`);
-    });
-  }
-
   // Edit function
   const handleEdit = (id) => {
     const editingRow = items.find((row) => row.id === id);
@@ -272,7 +255,6 @@ export default function Dashboard() {
     isEditing,
     setIsEditing,
     handleAddItem,
-    createPDF,
     handleEdit,
     handleDelete,
     // showModal,
