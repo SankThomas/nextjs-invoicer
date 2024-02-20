@@ -10,21 +10,15 @@ export default function PreviewInvoice({ values, formik }) {
   // Create PDF
   function createPDF() {
     const invoice = document.getElementById("pdf");
-    html2canvas(invoice, {
-      logging: true,
-      letterRendering: 1,
-      useCORS: true,
-    }).then((canvas) => {
-      const imgWidth = 208;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const imgData = canvas.toDataURL("img/webp");
+    html2canvas(invoice).then((canvas) => {
+      const imgData = canvas.toDataURL("img/jpeg");
       const pdf = new jsPDF({
-        orientation: "portrait",
+        orientation: "p",
         unit: "mm",
-        format: [canvas.height, canvas.width],
+        format: "a4",
       });
-      pdf.addImage(imgData, "WEBP", 10, 10, imgWidth, imgHeight);
-      pdf.save(`${formik.values.clientName}.pdf`);
+      pdf.addImage(imgData, "JPEG", 30, -150, 150, 400, "FAST");
+      pdf.save(`${formik.values.clientName} - invoice.pdf`);
     });
   }
 
@@ -120,7 +114,7 @@ export default function PreviewInvoice({ values, formik }) {
 
           <div>
             <p className="text-slate-900 mb-2">
-              <strong>Additional notes to the client</strong>
+              <strong>Additional notes</strong>
             </p>
 
             <p className="w-1/2">{formik.values.notes}</p>
