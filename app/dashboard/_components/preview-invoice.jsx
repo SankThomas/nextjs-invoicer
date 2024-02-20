@@ -24,7 +24,7 @@ export default function PreviewInvoice({ values, formik }) {
         format: [canvas.height, canvas.width],
       });
       pdf.addImage(imgData, "WEBP", 10, 10, imgWidth, imgHeight);
-      pdf.save(`${values.clientName}.pdf`);
+      pdf.save(`${formik.values.clientName}.pdf`);
     });
   }
 
