@@ -22,6 +22,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { useFormik } from "formik";
 
 export default function Dashboard() {
   // State values for step 1
@@ -43,10 +44,10 @@ export default function Dashboard() {
 
   // State values for step 3
   const [item, setItem] = useState("");
-  const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(300000);
+  const [total, setTotal] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -58,6 +59,91 @@ export default function Dashboard() {
 
   // Preview invoice
   const [previewInvoice, setPreviewInvoice] = useState(false);
+
+  // Formik form validation
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.name) {
+      errors.name = "Please enter your name or your company name";
+    }
+
+    if (values.email) {
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email);
+    } else {
+      errors.email = "Please enter a valid email address";
+    }
+
+    if (!values.address) {
+      errors.address = "Your address is required";
+    }
+
+    if (!values.phoneNumber) {
+      errors.phoneNumber = "Your phone number is required";
+    }
+
+    if (!values.bankName) {
+      errors.bankName = "Your bank name is required";
+    }
+
+    if (!values.accountNumber) {
+      errors.accountNumber = "Your account number is required";
+    }
+
+    if (!values.clientName) {
+      errors.clientName = "Client name is required";
+    }
+
+    if (values.clientEmail) {
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.clientEmail);
+    } else {
+      errors.clientEmail = "Please enter a valid email address";
+    }
+
+    if (!values.clientAddress) {
+      errors.clientAddress = "Client address is required";
+    }
+
+    if (!values.invoiceNumber) {
+      errors.invoiceNumber = "Invoice number is required";
+    }
+
+    if (!values.invoiceDate) {
+      errors.invoiceDate = "Invoice is required";
+    }
+
+    if (!values.dueDate) {
+      errors.dueDate = "Due date is required";
+    }
+
+    if (!values.notes) {
+      errors.notes = "Enter any additional notes to the client";
+    }
+
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      address: "",
+      phoneNumber: "",
+      bankName: "",
+      accountNumber: "",
+      clientName: "",
+      clientEmail: "",
+      clientAddress: "",
+      invoiceNumber: "",
+      invoiceDate: "",
+      dueDate: "",
+      notes: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
 
   // Calculate the total amount
   function calculateTotal() {
@@ -133,6 +219,7 @@ export default function Dashboard() {
   // Delete function
   const handleDelete = (id) => {
     setItems(items.filter((row) => row.id !== id));
+    toast.error("You have deleted an item");
   };
 
   // Destructure all our state values to easily pass them as props
@@ -212,18 +299,18 @@ export default function Dashboard() {
                 Create Invoice
               </h1>
 
-              <div className="flex flex-col md:grid md:grid-cols-3 gap-8 lg:gap-16 lg:max-w-[1440px] lg:mx-auto pb-20">
-                <div className="flex-1 md:col-span-2 lg:max-h-[600px] lg:overflow-auto px-4">
+              <div className="px-4 lg:grid lg:grid-cols-2 lg:gap-8 pb-20">
+                <div className="">
                   {/* {steps === 1 && <Step1 values={values} setSteps={setSteps} />}
                   {steps === 2 && <Step2 values={values} setSteps={setSteps} />}
                   {steps === 3 && <Step3 values={values} setSteps={setSteps} />} */}
 
-                  <Step1 values={values} setSteps={setSteps} />
-                  <Step2 values={values} setSteps={setSteps} />
-                  <Step3 values={values} setSteps={setSteps} />
+                  <Step1 values={values} setSteps={setSteps} formik={formik} />
+                  <Step2 values={values} setSteps={setSteps} formik={formik} />
+                  <Step3 values={values} setSteps={setSteps} formik={formik} />
                 </div>
 
-                <div id="pdf" className="hidden lg:block flex-1 scale-90">
+                <div id="pdf" className="hidden lg:block scale-75">
                   <InvoiceView values={values} />
                 </div>
               </div>
