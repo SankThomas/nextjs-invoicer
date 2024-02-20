@@ -117,7 +117,7 @@ export default function Dashboard() {
     }
 
     if (!values.notes) {
-      errors.notes = "Enter any additional notes to the client";
+      errors.notes = "(Optional) Enter any additional notes to the client";
     }
 
     return errors;
@@ -222,6 +222,13 @@ export default function Dashboard() {
     toast.error("You have deleted an item");
   };
 
+  if (items.length === 0 && previewInvoice === true) {
+    setPreviewInvoice(false);
+    toast.error(
+      "Please add at least one item to your invoice before you can preview"
+    );
+  }
+
   // Destructure all our state values to easily pass them as props
   const values = {
     name,
@@ -286,7 +293,7 @@ export default function Dashboard() {
           <UserButton afterSignOutUrl="/" />
         </div>
 
-        <div className="">
+        <div>
           <div className="absolute top-4 left-4 w-40 h-40 bg-pink-500/25 blur-[100px] -z-10"></div>
 
           <div>
@@ -299,8 +306,8 @@ export default function Dashboard() {
                 Create Invoice
               </h1>
 
-              <div className="px-4 lg:grid lg:grid-cols-2 lg:gap-8 pb-20">
-                <div className="">
+              <div className="px-4 xl:px-12 lg:grid lg:grid-cols-2 lg:gap-8 pb-20">
+                <div>
                   {/* {steps === 1 && <Step1 values={values} setSteps={setSteps} />}
                   {steps === 2 && <Step2 values={values} setSteps={setSteps} />}
                   {steps === 3 && <Step3 values={values} setSteps={setSteps} />} */}
@@ -310,8 +317,8 @@ export default function Dashboard() {
                   <Step3 values={values} setSteps={setSteps} formik={formik} />
                 </div>
 
-                <div id="pdf" className="hidden lg:block scale-75">
-                  <InvoiceView values={values} />
+                <div id="pdf" className="hidden lg:block scale-90">
+                  <InvoiceView values={values} formik={formik} />
                 </div>
               </div>
             </article>
