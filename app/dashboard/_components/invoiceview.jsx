@@ -4,7 +4,7 @@ import { format } from "date-fns";
 export default function InvoiceView({ values }) {
   return (
     <>
-      <section className="bg-white p-4 rounded border space-y-8">
+      <section className="sticky top-4 bg-white p-4 rounded border space-y-8">
         <div className="text-right">
           <h2 className="text-lg lg:text-xl font-bold">{values.name}</h2>
           <p>{values.address}</p>
