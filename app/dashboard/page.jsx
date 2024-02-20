@@ -285,7 +285,7 @@ export default function Dashboard() {
     <>
       <section>
         {/* {showModal && <SendEmailModal values={values} />} */}
-        {previewInvoice && <PreviewInvoice values={values} />}
+        {previewInvoice && <PreviewInvoice values={values} formik={formik} />}
 
         <div className="p-4 lg:ml-52 bg-slate-900 flex items-center justify-between">
           <Button variant="custom">Your Dashboard</Button>

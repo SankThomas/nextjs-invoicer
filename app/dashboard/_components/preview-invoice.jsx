@@ -6,7 +6,7 @@ import { XIcon } from "lucide-react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
-export default function PreviewInvoice({ values }) {
+export default function PreviewInvoice({ values, formik }) {
   // Create PDF
   function createPDF() {
     const invoice = document.getElementById("pdf");
@@ -51,33 +51,37 @@ export default function PreviewInvoice({ values }) {
 
         <section className="bg-white p-4 rounded border space-y-8 max-w-3xl md:mx-auto mx-8 my-10 pt-5 pb-10 px-10 max-h-[700px] overflow-auto">
           <div className="text-right">
-            <h2 className="text-lg lg:text-xl font-bold">{values.name}</h2>
-            <p>{values.address}</p>
+            <h2 className="text-lg lg:text-xl font-bold">
+              {formik.values.name}
+            </h2>
+            <p>{formik.values.address}</p>
             <p>
-              <strong>Bank Name:</strong> {values.bankName}
+              <strong>Bank Name:</strong> {formik.values.bankName}
             </p>
             <p>
-              <strong>Bank Account number:</strong> {values.accountNumber}
+              <strong>Bank Account number:</strong>{" "}
+              {formik.values.accountNumber}
             </p>
           </div>
 
           <div>
-            <h2 className="font-bold text-lg">{values.clientName}</h2>
-            <p>{values.clientAddress}</p>
+            <h2 className="font-bold text-lg">{formik.values.clientName}</h2>
+            <p>{formik.values.clientAddress}</p>
           </div>
 
           <div className="text-right">
             <h2 className="font-bold text-lg">Invoice Details</h2>
-            <p>Invoice number: {values.invoiceNumber}</p>
-            {values.invoiceDate && (
+            <p>Invoice number: {formik.values.invoiceNumber}</p>
+            {formik.values.invoiceDate && (
               <p>
                 Invoice date:{" "}
-                {format(new Date(values.invoiceDate), "do MMMM yyyy")}
+                {format(new Date(formik.values.invoiceDate), "do MMMM yyyy")}
               </p>
             )}
-            {values.dueDate && (
+            {formik.values.dueDate && (
               <p>
-                Due date: {format(new Date(values.dueDate), "do MMMM yyyy")}
+                Due date:{" "}
+                {format(new Date(formik.values.dueDate), "do MMMM yyyy")}
               </p>
             )}
           </div>
@@ -118,30 +122,30 @@ export default function PreviewInvoice({ values }) {
               <strong>Additional notes to the client</strong>
             </p>
 
-            <p>{values.notes}</p>
+            <p>{formik.values.notes}</p>
           </div>
 
           <div className="border-t pt-8">
             <ul className="flex flex-wrap items-center justify-center gap-4 text-xs">
               <li>
                 <strong>Name: </strong>
-                {values.name}
+                {formik.values.name}
               </li>
               <li>
                 <strong>Email: </strong>
-                {values.email}
+                {formik.values.email}
               </li>
               <li>
                 <strong>Bank Account Holder: </strong>
-                {values.name}
+                {formik.values.name}
               </li>
               <li>
                 <strong>Bank Account Number: </strong>
-                {values.accountNumber}
+                {formik.values.accountNumber}
               </li>
               <li>
                 <strong>Phone: </strong>
-                {values.phoneNumber}
+                {formik.values.phoneNumber}
               </li>
             </ul>
           </div>
