@@ -122,7 +122,7 @@ export default function PreviewInvoice({ values, formik }) {
               <strong>Additional notes to the client</strong>
             </p>
 
-            <p>{formik.values.notes}</p>
+            <p className="w-1/2">{formik.values.notes}</p>
           </div>
 
           <div className="border-t pt-8">
